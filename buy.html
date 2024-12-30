@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Двоспальне ліжко з м'яким узголів'ям</title>
+    <style>
+/* Стили для всплывающего сообщения */
+.price-change-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2ecc71;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    z-index: 1000;
+    animation: fade-in-out 3s ease-in-out;
+}
+
+/* Анимация появления и исчезновения */
+@keyframes fade-in-out {
+    0% { opacity: 0; transform: translateY(20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+}
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumbs {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumbs a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .product-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .product-image {
+            flex: 1;
+            min-width: 350px;
+        }
+
+        .product-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .thumbnail-container img {
+            width: 90px;
+            height: 90px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s;
+        }
+
+        .thumbnail-container img:hover {
+            border-color: #3498db;
+        }
+
+        .product-info {
+            flex: 2;
+            min-width: 350px;
+        }
+
+        .product-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .availability {
+            color: #2ecc71;
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .ratings {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+        .price {
+            font-size: 28px;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #7f8c8d;
+            margin-left: 15px;
+            font-size: 20px;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .buttons button {
+            padding: 14px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background-color 0.4s, transform 0.3s;
+        }
+
+        .buttons .add-to-cart {
+            background-color: #078d10;
+            color: white;
+        }
+
+        .buttons .add-to-cart:hover {
+            background-color: #25d925;
+            transform: translateY(-9px);
+        }
+
+        .buttons .buy-now {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .buttons .buy-now:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+        }
+
+        .options-block {
+            background-color: #f9f9f9;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 9px 45px rgba(0, 0, 0, 0.1);
+        }
+
+        .details label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .details select {
+            padding: 10px;
+            width: 100%;
+            max-width: 350px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f1f1f1;
+        }
+
+        .details select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .details .description {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-info, .product-image {
+                min-width: 100%;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .buttons button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Ліжка меблі</h1>
+</header>
+
+<div class="container">
+    <div class="breadcrumbs">
+        <a href="#">Головна</a> &gt; <a href="#">Двоспальне ліжко з м'яким узголів'ям</a>
+    </div>
+
+    <div class="product-container">
+        <div class="product-image">
+            <img src="photo3.jpg" alt="Ліжко">
+          <div class="thumbnail-container">
+
+    	<img src="photo1.jpg" alt="Thumbnail" onclick="setMainImage('photo1.jpg')">
+    	<img src="photo2.jpg" alt="Thumbnail" onclick="setMainImage('photo2.jpg')">
+    	<img src="photo3.jpg" alt="Thumbnail" onclick="setMainImage('photo3.jpg')">
+    	<img src="photo4.jpg" alt="Thumbnail" onclick="setMainImage('photo4.jpg')">
+	  </div>
+    <div class="buttons">
+<button class="buy-now" onclick="openModal()">Купити</button>
+    </div>
+
+        </div>
+<!-- Модальное окно для ввода данных -->
+<div id="purchaseModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+    <h2>Оформлення замовлення</h2>
+    <label>Ім'я:</label>
+    <input type="text" id="name" required style="width: 100%; margin-bottom: 10px;"><br>
+    <label>Телефон:</label>
+    <input type="text" id="phone" required style="width: 100%; margin-bottom: 10px;"><br>
+    <label>Адреса доставки:</label>
+    <input type="text" id="address" required style="width: 100%; margin-bottom: 10px;"><br>
+    <button onclick="submitOrder()" style="background: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Купити</button>
+    <button onclick="closeModal()" style="margin-left: 10px; background: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 5px;">Закрити</button>
+</div>
+
+        <div class="product-info">
+            <div class="product-title">Двоспальне ліжко з м'яким узголів'ям</div>
+
+
+
+            <div class="description">
+          <div class="price" id="price">
+                13 580 грн
+            </div>
+                <p><strong>Опис:</strong> Це стильне ліжко з матрацом, ідеально підходить для вашого дому. Комбінація елегантного дизайну і високоякісних матеріалів забезпечить комфортний сон та гармонію в інтер'єрі.</p>
+                <p><strong>Особливості:</strong> Міцна конструкція, сучасний дизайн, висока зносостійкість.</p>
+		    <!-- Кнопки -->
+
+    <!-- Блок с опціями -->
+    <div class="options-block">
+        <div class="details">
+</select>
+
+
+            <label>Наявність підйомного механізму:</label>
+            <select id="mechanism" onchange="updatePrice()">
+                <option value="no">Ні</option>
+                <option value="yes">Так</option>
+            </select>
+
+            <label>Наявність матрацу:</label>
+            <select id="mattress" onchange="updatePrice()">
+                <option value="no">Ні</option>
+                <option value="yes">Так</option>
+            </select>
+            <label>Ширина спального місця:</label>
+            <select>
+                <option>160</option>
+                <option>180</option>
+                <option>200</option>
+            </select>
+
+            <label>Довжина спального місця:</label>
+            <select>
+                <option>200</option>
+                <option>220</option>
+            </select>
+
+            <label>Виберіть категорію:</label>
+	  <div id="image-display"></div>
+          <select id="category" onchange="updateImage()">
+   	  <option value="category1">1 категорія</option>
+  	  <option value="category2">2 категорія</option>
+  	  <option value="category3">3 категорія</option>
+ 	  <option value="category4">4 категорія</option>
+		
+            <div class="description">
+                <p><strong>Додаткові характеристики:</strong></p>
+                <ul>
+                    <li>Матеріал каркасу: Дерево + метал</li>
+                    <li>Тип матрацу: Безпружинний</li>
+                    <li>Колір: на вибір</li>
+            </div>
+        </div>
+    </div>
+
+   
+<script>
+// Открыть модальное окно
+function openModal() {
+    document.getElementById('purchaseModal').style.display = 'block';
+}
+
+// Закрыть модальное окно
+function closeModal() {
+    document.getElementById('purchaseModal').style.display = 'none';
+}
+
+function submitOrder() {
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+
+    if (!name || !phone || !address) {
+        alert("Будь ласка, заповніть всі поля!");
+        return;
+    }
+
+    const newOrder = {
+        name: name,
+        phone: phone,
+        address: address,
+        category: document.getElementById('category').value,
+        mechanism: document.getElementById('mechanism').value,
+        mattress: document.getElementById('mattress').value,
+        price: document.getElementById('price').innerText
+    };
+
+    // Получаем массив заказов из localStorage или создаем новый
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orders.push(newOrder);
+    localStorage.setItem('orders', JSON.stringify(orders));
+
+    // Перенаправление на страницу "головна"
+    window.location.href = 'index.html?message=added';
+}
+
+
+// Функция для отображения всплывающего сообщения об изменении цены
+function showPriceChangeMessage(newPrice) {
+    // Создаём блок для сообщения
+    const messageBox = document.createElement("div");
+    messageBox.className = "price-change-message";
+    messageBox.innerText = `Ціна змінена: ${newPrice} грн`;
+
+    // Добавляем сообщение на страницу
+    document.body.appendChild(messageBox);
+
+    // Удаляем сообщение через 3 секунды
+    setTimeout(() => {
+        messageBox.remove();
+    }, 3000);
+}
+
+// Функция для обновления цены в зависимости от выбранных параметров
+function updatePrice() {
+    const mechanismSelect = document.getElementById("mechanism");
+    const mattressSelect = document.getElementById("mattress");
+    const categorySelect = document.getElementById("category");
+    const priceElement = document.getElementById("price");
+
+    // Базовая цена
+    let basePrice = 13580;
+
+    // Учитываем доплату за категорию
+    const categoryPrices = {
+        category1: 1000,
+        category2: 2000,
+        category3: 3000,
+        category4: 4000
+    };
+
+    const selectedCategory = categorySelect.value;
+    if (categoryPrices[selectedCategory]) {
+        basePrice += categoryPrices[selectedCategory];
+    }
+
+    // Учитываем доплату за механизм и матрас
+    if (mechanismSelect.value === "yes") {
+        basePrice += 3500; // Доплата за механизм
+    }
+    if (mattressSelect.value === "yes") {
+        basePrice += 5070; // Доплата за матрас
+    }
+
+    // Обновляем отображение цены
+    priceElement.innerHTML = `${basePrice.toLocaleString()} грн <span class=""></span>`;
+
+    // Показываем всплывающее сообщение об изменении цены
+    showPriceChangeMessage(basePrice.toLocaleString());
+}
+// Функция для обновления отображаемого изображения в зависимости от выбранной категории
+function updateImage() {
+    const categorySelect = document.getElementById("category");
+    const imageDisplay = document.getElementById("image-display");
+
+
+
+    // Получаем выбранную категорию
+    const selectedCategory = categorySelect.value;
+
+    // Отображаем соответствующее изображение или очищаем блок
+    if (images[selectedCategory]) {
+        imageDisplay.innerHTML = `<img src="${images[selectedCategory]}" alt="Selected Image" style="width: 100%; max-width: 300px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">`;
+    } else {
+        imageDisplay.innerHTML = ""; // Если категория не выбрана
+    }
+
+    // Обновляем цену при изменении категории
+    updatePrice();
+}
+
+// Функция для обновления главного изображения при клике на миниатюру
+function setMainImage(src) {
+    const mainImage = document.querySelector('.product-image img');
+    mainImage.src = src;
+}
+
+// Функция для обновления цены в зависимости от выбранных параметров
+function updatePrice() {
+    const mechanismSelect = document.getElementById("mechanism");
+    const mattressSelect = document.getElementById("mattress");
+    const categorySelect = document.getElementById("category");
+    const priceElement = document.getElementById("price");
+
+    // Базовая цена
+    let basePrice = 13580;
+
+    // Учитываем доплату за категорию
+    const categoryPrices = {
+        category1: 1000,
+        category2: 2000,
+        category3: 3000,
+        category4: 4000
+    };
+
+    const selectedCategory = categorySelect.value;
+    if (categoryPrices[selectedCategory]) {
+        basePrice += categoryPrices[selectedCategory];
+    }
+
+    // Учитываем доплату за механизм и матрас
+    if (mechanismSelect.value === "yes") {
+        basePrice += 3500; // Доплата за механизм
+    }
+    if (mattressSelect.value === "yes") {
+        basePrice += 5070; // Доплата за матрас
+    }
+
+    // Обновляем отображение цены
+    priceElement.innerHTML = `${basePrice.toLocaleString()} грн <span class=""></span>`;
+}
+// Функция для обновления отображаемого изображения в зависимости от выбранной категории
+function updateImage() {
+    const categorySelect = document.getElementById("category");
+    const imageDisplay = document.getElementById("image-display");
+
+    // Объект с категориями и соответствующими изображениями
+    const images = {
+        category1: "photo1.jpg",
+        category2: "photo2.jpg",
+        category3: "photo3.jpg",
+        category4: "photo4.jpg"
+    };
+
+    // Получаем выбранную категорию
+    const selectedCategory = categorySelect.value;
+
+    // Отображаем соответствующее изображение или очищаем блок
+    if (images[selectedCategory]) {
+        imageDisplay.innerHTML = `<img src="${images[selectedCategory]}" alt="Selected Image" style="width: 100%; max-width: 300px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">`;
+    } else {
+        imageDisplay.innerHTML = ""; // Если категория не выбрана
+    }
+
+    // Обновляем цену при изменении категории
+    updatePrice();
+}
+
+// Функция для обновления цены в зависимости от выбранных параметров
+function updatePrice() {
+    const mechanismSelect = document.getElementById("mechanism");
+    const mattressSelect = document.getElementById("mattress");
+    const categorySelect = document.getElementById("category");
+    const priceElement = document.getElementById("price");
+
+    // Базовая цена
+    let basePrice = 13580;
+
+    // Учитываем доплату за категорию
+    const categoryPrices = {
+        category1: 1000,
+        category2: 2000,
+        category3: 3000,
+        category4: 4000
+    };
+
+    const selectedCategory = categorySelect.value;
+    if (categoryPrices[selectedCategory]) {
+        basePrice += categoryPrices[selectedCategory];
+    }
+
+    // Учитываем доплату за механизм и матрас
+    if (mechanismSelect.value === "yes") {
+        basePrice += 3500; // Доплата за механизм
+    }
+    if (mattressSelect.value === "yes") {
+        basePrice += 5070; // Доплата за матрас
+    }
+
+    // Обновляем отображение цены
+    priceElement.innerHTML = `${basePrice.toLocaleString()} грн <span class=""></span>`;
+}
+// Функция для отображения всплывающего сообщения
+function showCategoryChangeMessage(selectedCategoryName) {
+    // Создаём блок для сообщения
+    const messageBox = document.createElement("div");
+    messageBox.className = "price-change-message"; // Используем стили для всплывающего окна
+   
+    // Добавляем сообщение на страницу
+    document.body.appendChild(messageBox);
+
+    // Удаляем сообщение через 3 секунды
+    setTimeout(() => {
+        messageBox.remove();
+    }, 3000);
+}
+// Функция для отображения всплывающего сообщения с ценой
+function showCategoryPriceChangeMessage(newPrice) {
+    // Создаём блок для сообщения
+    const messageBox = document.createElement("div");
+    messageBox.className = "price-change-message";
+    messageBox.innerText = `Ціна змінена: ${newPrice} грн`;
+
+    // Добавляем сообщение на страницу
+    document.body.appendChild(messageBox);
+
+    // Удаляем сообщение через 3 секунды
+    setTimeout(() => {
+        messageBox.remove();
+    }, 3000);
+}
+
+// Функция для обновления цены в зависимости от выбранных параметров
+function updatePrice() {
+    const mechanismSelect = document.getElementById("mechanism");
+    const mattressSelect = document.getElementById("mattress");
+    const categorySelect = document.getElementById("category");
+    const priceElement = document.getElementById("price");
+
+    // Базовая цена
+    let basePrice = 13580;
+
+    // Учитываем доплату за категорию
+    const categoryPrices = {
+        category1: 1000,
+        category2: 2000,
+        category3: 3000,
+        category4: 4000
+    };
+
+    const selectedCategory = categorySelect.value;
+    if (categoryPrices[selectedCategory]) {
+        basePrice += categoryPrices[selectedCategory];
+    }
+
+    // Учитываем доплату за механизм и матрас
+    if (mechanismSelect.value === "yes") {
+        basePrice += 3500; // Доплата за механизм
+    }
+    if (mattressSelect.value === "yes") {
+        basePrice += 5070; // Доплата за матрас
+    }
+
+    // Обновляем отображение цены
+    priceElement.innerHTML = `${basePrice.toLocaleString()} грн <span class=""></span>`;
+
+    // Показываем сообщение об изменении цены
+    showCategoryPriceChangeMessage(basePrice.toLocaleString());
+}
+
+// Функция для обновления отображаемого изображения при изменении категории
+function updateImage() {
+    const categorySelect = document.getElementById("category");
+    const imageDisplay = document.getElementById("image-display");
+
+    // Объект с категориями и соответствующими изображениями
+    const images = {
+        category1: "12(2).jpg",
+        category2: "13(1).jpg",
+        category3: "mebelnaya-tkan-ultra-velyur-irpen-bucha_acd0e42ecebb516_500x500.webp.jpg",
+        category4: "mebleva-tkanyna-spark-unitex11508-53727623734773.jpg"
+    };
+
+    // Получаем выбранную категорию
+    const selectedCategory = categorySelect.value;
+
+    // Отображаем соответствующее изображение или очищаем блок
+    if (images[selectedCategory]) {
+        imageDisplay.innerHTML = `<img src="${images[selectedCategory]}" alt="Selected Image" style="width: 100%; max-width: 300px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">`;
+    } else {
+        imageDisplay.innerHTML = ""; // Если категория не выбрана
+    }
+
+    // Обновляем цену и показываем сообщение с новой ценой
+    updatePrice();
+}
+
+// Функция для обновления отображаемого изображения и вывода сообщения об изменении категории
+function updateImage() {
+    const categorySelect = document.getElementById("category");
+    const imageDisplay = document.getElementById("image-display");
+
+    // Объект с категориями и соответствующими изображениями
+    const images = {
+        category1: "12(2).jpg",
+        category2: "13(1).jpg",
+        category3: "mebelnaya-tkan-ultra-velyur-irpen-bucha_acd0e42ecebb516_500x500.webp.jpg",
+        category4: "photo4.jpg"
+    };
+
+    // Объект с названиями категорий
+    const categoryNames = {
+        category1: "1 категорія",
+        category2: "2 категорія",
+        category3: "3 категорія",
+        category4: "4 категорія"
+    };
+
+    // Получаем выбранную категорию
+    const selectedCategory = categorySelect.value;
+
+    // Отображаем соответствующее изображение или очищаем блок
+    if (images[selectedCategory]) {
+        imageDisplay.innerHTML = `<img src="${images[selectedCategory]}" alt="Selected Image" style="width: 100%; max-width: 300px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">`;
+    } else {
+        imageDisplay.innerHTML = ""; // Если категория не выбрана
+    }
+
+    // Показываем сообщение об изменении категории
+    if (categoryNames[selectedCategory]) {
+        showCategoryChangeMessage(categoryNames[selectedCategory]);
+    }
+
+    // Обновляем цену при изменении категории
+    updatePrice();
+}
+
+
+
+
+</script>
+
+</body>
+</html>
